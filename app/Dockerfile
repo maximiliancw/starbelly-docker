@@ -13,7 +13,7 @@ RUN curl https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py && \
     rm /tmp/get-pip.py
 
 # Get Starbelly source code.
-COPY dependencies/starbelly /starbelly
+COPY ./dependencies/starbelly /starbelly
 WORKDIR /starbelly
 
 # Install Python dependencies.
@@ -24,7 +24,7 @@ RUN poetry install --no-dev
 RUN poetry run python -m formasaurus init
 
 # Set up root profile.
-COPY bash_aliases /root/.bash_aliases
+COPY ./bash_aliases /root/.bash_aliases
 
 ENV PS1='starbelly-app:$PWD# '
 ENTRYPOINT ["poetry", "run", "python", "tools/container_init.py"]
